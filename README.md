@@ -22,7 +22,7 @@ robot.on('error', function (err) {
 });
 
 robot.on('ack', function (packet) {
-    console.log('ack', packet.did, packet.did);
+    console.log('ack', packet.did, packet.cid);
 });
 
 robot.on('close', function () {
