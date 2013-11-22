@@ -16,6 +16,7 @@
     "tap": "~0.4.4"
   },
   "dependencies": {
-    "serialport": "~1.2.5"
+    "serialport": "~1.2.5",
+    "debuglog": "0.0.2"
   }
 }

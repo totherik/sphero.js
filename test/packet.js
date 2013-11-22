@@ -50,7 +50,7 @@ test('packet buffer with data', function (t) {
     t.equal(data[6], 0xff); // data[0];
     t.equal(data[7], 0xfe); // data[1];
     t.equal(data[8], 0xfd); // data[2];
-    t.equal(data[9], 0x03); // chk
+    t.equal(data[9], 0xfe); // chk
     t.end();
 
 });
@@ -71,7 +71,7 @@ test('packet buffer with resetTimeout', function (t) {
     t.equal(data[6], 0xff); // data[0];
     t.equal(data[7], 0xfe); // data[1];
     t.equal(data[8], 0xfd); // data[2];
-    t.equal(data[9], 0x01); // chk
+    t.equal(data[9], 0xfe); // chk
     t.end();
 
 });
@@ -93,7 +93,7 @@ test('packet buffer with requestAck', function (t) {
     t.equal(data[6], 0xff); // data[0];
     t.equal(data[7], 0xfe); // data[1];
     t.equal(data[8], 0xfd); // data[2];
-    t.equal(data[9], 0x02); // chk
+    t.equal(data[9], 0xfe); // chk
     t.end();
 
 });
@@ -115,7 +115,7 @@ test('packet buffer with resetTimeout and requestAck', function (t) {
     t.equal(data[6], 0xff); // data[0];
     t.equal(data[7], 0xfe); // data[1];
     t.equal(data[8], 0xfd); // data[2];
-    t.equal(data[9], 0x00); // chk
+    t.equal(data[9], 0xfe); // chk
     t.end();
 
 });
