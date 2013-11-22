@@ -7,7 +7,7 @@ var test = require('tap').test,
 
 var options = {
     device: '/dev/cu.Bluetooth-Incoming-Port',
-    resetTimer: true,
+    resetTimeout: true,
     requestAck: false
 };
 
@@ -29,7 +29,7 @@ test('sphero create', function (t) {
     t.ok(robot instanceof events.EventEmitter);
     t.equal(typeof robot.open, 'function');
     t.equal(typeof robot.close, 'function');
-    t.equal(robot.resetTimer, options.resetTimer);
+    t.equal(robot.resetTimeout, options.resetTimeout);
     t.equal(robot.requestAck, options.requestAck);
 
     var sphero = Object.getPrototypeOf(robot);

@@ -13,7 +13,7 @@ test('packet create', function (t) {
     t.equal(p.data, undefined);
     t.equal(p.response, undefined);
     t.equal(p.seq, 0);
-    t.equal(p.resetTimer, false);
+    t.equal(p.resetTimeout, false);
     t.equal(p.requestAck, false);
     t.end();
 
@@ -21,14 +21,14 @@ test('packet create', function (t) {
 
 test('packet create with args', function (t) {
 
-    var p = packet.create(0x00, 0x00, { resetTimer: true, requestAck: true});
+    var p = packet.create(0x00, 0x00, { resetTimeout: true, requestAck: true});
     t.equal(p.did, 0x00);
     t.equal(p.cid, 0x00);
     t.equal(p.chk, undefined);
     t.equal(p.data, undefined);
     t.equal(p.response, undefined);
     t.equal(p.seq, 0);
-    t.equal(p.resetTimer, true);
+    t.equal(p.resetTimeout, true);
     t.equal(p.requestAck, true);
     t.end();
 
@@ -55,9 +55,9 @@ test('packet buffer with data', function (t) {
 
 });
 
-test('packet buffer with resetTimer', function (t) {
+test('packet buffer with resetTimeout', function (t) {
 
-    var p = packet.create(0x01, 0x02, { resetTimer: true });
+    var p = packet.create(0x01, 0x02, { resetTimeout: true });
     p.data = new Buffer([0xff, 0xfe, 0xfd]);
 
     var data = p.toBuffer();
@@ -99,9 +99,9 @@ test('packet buffer with requestAck', function (t) {
 });
 
 
-test('packet buffer with resetTimer and requestAck', function (t) {
+test('packet buffer with resetTimeout and requestAck', function (t) {
 
-    var p = packet.create(0x01, 0x02, { resetTimer: true, requestAck: true });
+    var p = packet.create(0x01, 0x02, { resetTimeout: true, requestAck: true });
     p.data = new Buffer([0xff, 0xfe, 0xfd]);
 
     var data = p.toBuffer();
