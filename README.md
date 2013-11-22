@@ -1,6 +1,6 @@
 ### sphero.js
 
-An API client for [Sphero] (http://www.gosphero.com/) robots (inspired by [spheron] (https://github.com/alchemycs/spheron)).
+A [Sphero] (http://www.gosphero.com/) SDK for Node.js. Inspired by [spheron] (https://github.com/alchemycs/spheron).
 
 ```javascript
 'use strict';
