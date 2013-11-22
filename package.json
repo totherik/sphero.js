@@ -1,0 +1,21 @@
+{
+  "name": "rounders",
+  "version": "0.0.0",
+  "description": "A Node.js Sphero API Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap ./test"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": "",
+  "author": "Erik Toth",
+  "license": "BSD",
+  "devDependencies": {
+    "tap": "~0.4.4"
+  },
+  "dependencies": {
+    "serialport": "~1.2.5"
+  }
+}
