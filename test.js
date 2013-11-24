@@ -4,6 +4,13 @@ var sphero = require('./index'),
     debug = require('debuglog')('sphero.js');
 
 var connected = false;
+var timer, interval;
+
+
+function stop() {
+    clearTimeout(timer);
+    robot.roll(0, 0, 0);
+}
 
 function close() {
     if (connected) {
@@ -27,17 +34,14 @@ var robot = sphero.createRobot({
     requestAck: false
 });
 
-robot.on('packet', function (packet) {
-    debug('packet', packet);
-});
+//robot.on('packet', function (packet) {
+//    debug('packet', packet);
+//});
+//
+//robot.on('ack', function (packet) {
+//    debug('ack', packet);
+//});
 
-robot.on('ack', function (packet) {
-    debug('ack', packet);
-});
-
-robot.on('async', function (data) {
-    debug('async', data);
-});
 
 robot.on('error', function (err) {
     debug('ERR', err);
@@ -51,16 +55,59 @@ robot.on('collision', function () {
 
 
 robot.on('open', function () {
+    var degrees = 0;
+
     debug('connected');
     connected = true;
-    robot.configureCollisionDetection(1, 100, 0, 100, 0, 100);
-    robot.readLocator(function (err, data) {
-        if (err) {
-            debug('ERROR', err);
-            return;
+
+    function start() {
+        robot.roll(25, degrees, 1);
+        turn();
+    }
+
+    function turn() {
+        debug('turning', degrees);
+        robot.setHeading(degrees);
+        degrees += 5;
+        if (degrees >= 360) {
+            degrees -= 360;
         }
-        debug('location', data);
+        timer = setTimeout(turn, 100);
+    }
+
+    (function location() {
+        robot.readLocator(function (err, packet) {
+            debug(err || packet.response);
+            interval = setTimeout(location, 500);
+        });
+    }());
+
+    robot.configureCollisionDetection(1, 100, 0, 100, 0, 100);
+    robot.on('collision', function () {
+        stop();
+        setTimeout(start, 2500);
     });
+
+
+    robot.getBluetoothInfo(function (err, data) {
+        debug('bluetooth', data);
+    });
+
+    process.on('SIGINT', function () {
+        clearInterval(interval);
+        stop();
+    });
+
+    start();
+//
+//    robot.configureCollisionDetection(1, 100, 0, 100, 0, 100);
+//    robot.readLocator(function (err, data) {
+//        if (err) {
+//            debug('ERROR', err);
+//            return;
+//        }
+//        debug('location', data);
+//    });
 
 //    var timeout, count = 0;
 //    (function seesaw () {

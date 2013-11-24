@@ -1,7 +1,7 @@
 'use strict';
 
 var test = require('tap').test,
-    packet = require('../lib/orbotix/packet');
+    packet = require('../lib/sphero/orbotix/packet');
 
 
 test('packet create', function (t) {
